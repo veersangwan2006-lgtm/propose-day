@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thank You ❤️</title>
+
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    color: white;
+    text-align: center;
+  }
+
+  .container {
+    padding: 60px 18px;
+    max-width: 700px;
+    margin: auto;
+  }
+
+  h1 {
+    font-size: 2.3rem;
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    margin: 18px 0;
+  }
+
+  .heart {
+    position: fixed;
+    bottom: -20px;
+    font-size: 20px;
+    animation: float 6s linear;
+    color: red;
+    pointer-events: none;
+  }
+
+  @keyframes float {
+    from {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(-100vh);
+      opacity: 0;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>Thank you for saying YES 🥺❤️</h1>
+
+  <p>
+    thank you for saying yes you made my day  
+    and i am sholly mela paglet🥺
+  </p>
+
+  <p>
+    iloveyouuu foreverrrr and everrr😚😚😚  
+    ❤️❤️❤️
+  </p>
+</div>
+
+<script>
+  // floating hearts
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (Math.random() * 10 + 18) + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+  }, 350);
+</script>
+
+</body>
+</html>
