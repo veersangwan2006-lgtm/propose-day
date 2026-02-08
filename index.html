@@ -6,25 +6,41 @@
 <title>For Rashmi ❤️</title>
 
 <style>
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #ff6a88, #ff99ac);
-  color: white;
-  text-align: center;
-  min-height: 100vh;
-}
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ff6a88, #ff99ac);
+    color: white;
+    text-align: center;
+  }
+
+  /* SCROLL CONTAINER */
+  .page {
+    min-height: 100vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 
   .container {
     padding: 40px 16px 80px;
     max-width: 720px;
     margin: auto;
-    position: relative;
-    z-index: 1;
   }
 
-  h1 { font-size: 2.4rem; }
-  h2 { font-size: 1.6rem; margin-top: 30px; }
+  h1 {
+    font-size: 2.4rem;
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+    margin-top: 30px;
+  }
 
   p {
     font-size: 1.05rem;
@@ -32,7 +48,9 @@ body {
     margin: 14px 0;
   }
 
-  .buttons { margin-top: 30px; }
+  .buttons {
+    margin-top: 30px;
+  }
 
   .btn {
     background: white;
@@ -43,34 +61,6 @@ body {
     font-size: 1.1rem;
     cursor: pointer;
     margin: 12px;
-  }
-
-  /* FULLSCREEN EMOJI OVERLAY */
-  .emoji-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 999;
-    display: grid;
-    justify-items: center;
-    align-items: center;
-    background: rgba(255, 106, 136, 0.25);
-    animation: wave 3s ease-in-out forwards;
-  }
-
-  @keyframes wave {
-    0%   { transform: translateY(15px); }
-    50%  { transform: translateY(-15px); }
-    100% { transform: translateY(15px); }
-  }
-
-  .emoji {
-    font-size: 34px;
-    animation: pulse 1.2s ease-in-out infinite;
-  }
-
-  @keyframes pulse {
-    0%,100% { transform: scale(1); }
-    50% { transform: scale(1.15); }
   }
 
   /* NO button shake */
@@ -86,72 +76,53 @@ body {
 
 <body>
 
-<div class="container">
-  <h1>Hey Rashmi ❤️</h1>
+<div class="page">
+  <div class="container">
 
-  <p>
-    Hey loml ik sometimes don't understand you and don't listen to you  
-    i am sholly for being that way sometimes and i am changing myself  
-    as much as possible just for you🥺😚
-  </p>
+    <h1>Hey Rashmi ❤️</h1>
 
-  <p>
-    I still remember wo clg mai jo humne kiss ki thi and teacher agye the  
-    or hum just bache the 😂
-  </p>
+    <p>
+      Hey loml ik sometimes don't understand you and don't listen to you  
+      i am sholly for being that way sometimes and i am changing myself  
+      as much as possible just for you🥺😚
+    </p>
 
-  <p>
-    my life's been happier then ever since you came  
-    iloveyouuu jaannn🥺😚
-  </p>
+    <p>
+      I still remember wo clg mai jo humne kiss ki thi and teacher agye the  
+      or hum just bache the 😂
+    </p>
 
-  <p>
-    and baat rhi kl ki i always respect your consent  
-    i want you to say no when you don't feel like you wanna get touched by me  
-    but i will have some overthinking so please jaan  
-    wo overthinking khtm krwane mai ap help krna🥺😚
-  </p>
+    <p>
+      my life's been happier then ever since you came  
+      iloveyouuu jaannn🥺😚
+    </p>
 
-  <p>
-    Iloveyouuuuu forever and everrrrr😚😚😚😚😚😚  
-    💋💋💋💋💋❤️❤️❤️❤️
-  </p>
+    <p>
+      and baat rhi kl ki i always respect your consent  
+      i want you to say no when you don't feel like you wanna get touched by me  
+      but i will have some overthinking so please jaan  
+      wo overthinking khtm krwane mai ap help krna🥺😚
+    </p>
 
-  <h2>And from today…</h2>
-  <h1>Will you be my wifey? 👉🏻👈🏻🥺</h1>
+    <p>
+      Iloveyouuuuu forever and everrrrr😚😚😚😚😚😚  
+      💋💋💋💋💋❤️❤️❤️❤️
+    </p>
 
-  <div class="buttons">
-    <button class="btn" onclick="yesFlow()">YES 😍</button>
-    <button class="btn" id="noBtn">NO 🙄</button>
+    <h2>And for today…</h2>
+    <h1>Will you be my wifey? 👉🏻👈🏻🥺</h1>
+
+    <div class="buttons">
+      <button class="btn" onclick="goYes()">YES 😍</button>
+      <button class="btn" id="noBtn">NO 🙄</button>
+    </div>
+
   </div>
 </div>
 
 <script>
-  function yesFlow() {
-    const overlay = document.createElement("div");
-    overlay.className = "emoji-overlay";
-
-    // calculate grid based on screen size
-    const size = 60; // cell size
-    const cols = Math.ceil(window.innerWidth / size);
-    const rows = Math.ceil(window.innerHeight / size);
-
-    overlay.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
-    overlay.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
-
-    for (let i = 0; i < cols * rows; i++) {
-      const span = document.createElement("div");
-      span.className = "emoji";
-      span.innerHTML = Math.random() > 0.5 ? "😚" : "❤️";
-      overlay.appendChild(span);
-    }
-
-    document.body.appendChild(overlay);
-
-    // redirect exactly when animation ends (3s)
-    overlay.addEventListener("animationend", () => {
-      window.location.href = "yes.html";
-    });
+  function goYes() {
+    window.location.href = "yes.html";
   }
 
   const noBtn = document.getElementById("noBtn");
@@ -160,10 +131,13 @@ body {
   function escape() {
     if (running) return;
     running = true;
+
     noBtn.style.animation = "shake 0.4s";
+
     setTimeout(() => {
       const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
       const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+
       noBtn.style.position = "fixed";
       noBtn.style.left = x + "px";
       noBtn.style.top = y + "px";
