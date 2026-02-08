@@ -45,27 +45,26 @@
     margin: 12px;
   }
 
-  /* Emoji overlay */
+  /* FULLSCREEN EMOJI OVERLAY */
   .emoji-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(255, 106, 136, 0.25);
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
-    align-content: center;
-    gap: 10px;
-    font-size: 32px;
     z-index: 999;
-    animation: floatWave 3s ease-in-out forwards;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    background: rgba(255, 106, 136, 0.25);
+    animation: wave 3s ease-in-out forwards;
   }
 
-  @keyframes floatWave {
-    0%   { transform: translateY(20px); }
-    50%  { transform: translateY(-20px); }
-    100% { transform: translateY(20px); }
+  @keyframes wave {
+    0%   { transform: translateY(15px); }
+    50%  { transform: translateY(-15px); }
+    100% { transform: translateY(15px); }
   }
 
   .emoji {
+    font-size: 34px;
     animation: pulse 1.2s ease-in-out infinite;
   }
 
@@ -118,7 +117,7 @@
     💋💋💋💋💋❤️❤️❤️❤️
   </p>
 
-  <h2>And for today…</h2>
+  <h2>And from today…</h2>
   <h1>Will you be my wifey? 👉🏻👈🏻🥺</h1>
 
   <div class="buttons">
@@ -132,22 +131,27 @@
     const overlay = document.createElement("div");
     overlay.className = "emoji-overlay";
 
-    const emojis = ["😚", "❤️"];
-    const count = 120; // controls density
+    // calculate grid based on screen size
+    const size = 60; // cell size
+    const cols = Math.ceil(window.innerWidth / size);
+    const rows = Math.ceil(window.innerHeight / size);
 
-    for (let i = 0; i < count; i++) {
-      const span = document.createElement("span");
+    overlay.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+    overlay.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
+
+    for (let i = 0; i < cols * rows; i++) {
+      const span = document.createElement("div");
       span.className = "emoji";
-      span.innerHTML = emojis[i % 2];
+      span.innerHTML = Math.random() > 0.5 ? "😚" : "❤️";
       overlay.appendChild(span);
     }
 
     document.body.appendChild(overlay);
 
-    // redirect after animation finishes (3s)
-    setTimeout(() => {
+    // redirect exactly when animation ends (3s)
+    overlay.addEventListener("animationend", () => {
       window.location.href = "yes.html";
-    }, 3000);
+    });
   }
 
   const noBtn = document.getElementById("noBtn");
