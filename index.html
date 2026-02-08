@@ -12,6 +12,7 @@
     background: linear-gradient(135deg, #ff6a88, #ff99ac);
     color: white;
     text-align: center;
+    overflow-x: hidden;
   }
 
   .container {
@@ -49,28 +50,17 @@
     font-size: 1.1rem;
     cursor: pointer;
     margin: 12px;
-    transition: transform 0.2s ease;
   }
 
-  .btn:active {
-    transform: scale(0.95);
-  }
-
-  #reply {
-    font-size: 1.3rem;
-    margin-top: 30px;
-  }
-
-  /* Shake animation */
+  /* shake animation */
   @keyframes shake {
     0% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    50% { transform: translateX(5px); }
-    75% { transform: translateX(-5px); }
+    25% { transform: translateX(-6px); }
+    50% { transform: translateX(6px); }
+    75% { transform: translateX(-6px); }
     100% { transform: translateX(0); }
   }
 
-  /* Floating hearts */
   .heart {
     position: fixed;
     bottom: -20px;
@@ -81,14 +71,8 @@
   }
 
   @keyframes float {
-    from {
-      transform: translateY(0);
-      opacity: 1;
-    }
-    to {
-      transform: translateY(-100vh);
-      opacity: 0;
-    }
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-100vh); opacity: 0; }
   }
 </style>
 </head>
@@ -126,51 +110,43 @@
     💋💋💋💋💋❤️❤️❤️❤️
   </p>
 
-  <h2>And from today…</h2>
+  <h2>And for today…</h2>
   <h1>Will you be my wifey? 👉🏻👈🏻🥺</h1>
 
   <div class="buttons">
-    <button class="btn" onclick="yes()">YES 😍</button>
+    <button class="btn" onclick="goYes()">YES 😍</button>
     <button class="btn" id="noBtn">NO 🙄</button>
   </div>
-
-  <div id="reply"></div>
 </div>
 
 <script>
-  function yes() {
-  window.location.href = "yes.html";
-}
+  function goYes() {
+    window.location.href = "yes.html";
+  }
 
   const noBtn = document.getElementById("noBtn");
-  let escaped = false;
+  let running = false;
 
-  function escapeButton() {
-    if (!escaped) {
-      noBtn.style.animation = "shake 0.4s";
-      escaped = true;
+  function escape() {
+    if (running) return;
+    running = true;
 
-      setTimeout(() => {
-        moveButton();
-        noBtn.style.animation = "";
-        escaped = false;
-      }, 400);
-    }
+    noBtn.style.animation = "shake 0.4s";
+
+    setTimeout(() => {
+      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+      const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+      noBtn.style.position = "fixed";
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+      noBtn.style.animation = "";
+      running = false;
+    }, 400);
   }
 
-  function moveButton() {
-    const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-    const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+  noBtn.addEventListener("mouseover", escape);
+  noBtn.addEventListener("click", escape);
 
-    noBtn.style.position = "fixed";
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
-  }
-
-  noBtn.addEventListener("mouseover", escapeButton);
-  noBtn.addEventListener("click", escapeButton);
-
-  // Floating hearts
   setInterval(() => {
     const heart = document.createElement("div");
     heart.className = "heart";
