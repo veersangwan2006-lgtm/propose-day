@@ -15,40 +15,17 @@
   }
 
   .container {
-    padding: 60px 18px;
+    padding: 70px 18px;
     max-width: 700px;
     margin: auto;
   }
 
-  h1 {
-    font-size: 2.3rem;
-    margin-bottom: 20px;
-  }
+  h1 { font-size: 2.4rem; }
 
   p {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     line-height: 1.7;
-    margin: 18px 0;
-  }
-
-  .heart {
-    position: fixed;
-    bottom: -20px;
-    font-size: 20px;
-    animation: float 6s linear;
-    color: red;
-    pointer-events: none;
-  }
-
-  @keyframes float {
-    from {
-      transform: translateY(0);
-      opacity: 1;
-    }
-    to {
-      transform: translateY(-100vh);
-      opacity: 0;
-    }
+    margin: 20px 0;
   }
 </style>
 </head>
@@ -68,19 +45,6 @@
     ❤️❤️❤️
   </p>
 </div>
-
-<script>
-  // floating hearts
-  setInterval(() => {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = (Math.random() * 10 + 18) + "px";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 6000);
-  }, 350);
-</script>
 
 </body>
 </html>
