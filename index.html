@@ -45,6 +45,35 @@
     margin: 12px;
   }
 
+  /* Emoji overlay */
+  .emoji-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(255, 106, 136, 0.25);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    align-content: center;
+    gap: 10px;
+    font-size: 32px;
+    z-index: 999;
+    animation: floatWave 3s ease-in-out forwards;
+  }
+
+  @keyframes floatWave {
+    0%   { transform: translateY(20px); }
+    50%  { transform: translateY(-20px); }
+    100% { transform: translateY(20px); }
+  }
+
+  .emoji {
+    animation: pulse 1.2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+  }
+
   /* NO button shake */
   @keyframes shake {
     0% { transform: translateX(0); }
@@ -52,21 +81,6 @@
     50% { transform: translateX(6px); }
     75% { transform: translateX(-6px); }
     100% { transform: translateX(0); }
-  }
-
-  /* Emoji wave animation */
-  .emoji {
-    position: fixed;
-    font-size: 30px;
-    animation: wave 2.4s ease-in-out forwards;
-    pointer-events: none;
-    z-index: 999;
-  }
-
-  @keyframes wave {
-    0%   { transform: translateY(120vh); }
-    50%  { transform: translateY(-20vh); }
-    100% { transform: translateY(120vh); }
   }
 </style>
 </head>
@@ -115,25 +129,25 @@
 
 <script>
   function yesFlow() {
-    const total = 120; // number of emojis
-    let finished = 0;
+    const overlay = document.createElement("div");
+    overlay.className = "emoji-overlay";
 
-    for (let i = 0; i < total; i++) {
-      const e = document.createElement("div");
-      e.className = "emoji";
-      e.innerHTML = Math.random() > 0.5 ? "❤️" : "😚";
-      e.style.left = Math.random() * 100 + "vw";
-      e.style.fontSize = (Math.random() * 14 + 22) + "px";
+    const emojis = ["😚", "❤️"];
+    const count = 120; // controls density
 
-      e.addEventListener("animationend", () => {
-        finished++;
-        if (finished === total) {
-          window.location.href = "yes.html";
-        }
-      });
-
-      document.body.appendChild(e);
+    for (let i = 0; i < count; i++) {
+      const span = document.createElement("span");
+      span.className = "emoji";
+      span.innerHTML = emojis[i % 2];
+      overlay.appendChild(span);
     }
+
+    document.body.appendChild(overlay);
+
+    // redirect after animation finishes (3s)
+    setTimeout(() => {
+      window.location.href = "yes.html";
+    }, 3000);
   }
 
   const noBtn = document.getElementById("noBtn");
@@ -143,7 +157,6 @@
     if (running) return;
     running = true;
     noBtn.style.animation = "shake 0.4s";
-
     setTimeout(() => {
       const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
       const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
