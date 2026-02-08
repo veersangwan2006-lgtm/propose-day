@@ -1,1 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Rashmi ❤️</title>
 
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ff6a88, #ff99ac);
+    color: white;
+    text-align: center;
+  }
+
+  .container {
+    padding: 40px 16px 80px;
+    max-width: 720px;
+    margin: auto;
+  }
+
+  h1 {
+    font-size: 2.4rem;
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+    margin-top: 30px;
+  }
+
+  p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin: 14px 0;
+  }
+
+  .buttons {
+    margin-top: 30px;
+  }
+
+  .btn {
+    background: white;
+    color: #ff4f7a;
+    padding: 14px 26px;
+    border: none;
+    border-radius: 28px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin: 12px;
+    transition: transform 0.2s ease;
+  }
+
+  .btn:active {
+    transform: scale(0.95);
+  }
+
+  #reply {
+    font-size: 1.3rem;
+    margin-top: 30px;
+  }
+
+  /* Shake animation */
+  @keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+  }
+
+  /* Floating hearts */
+  .heart {
+    position: fixed;
+    bottom: -20px;
+    font-size: 20px;
+    animation: float 6s linear;
+    color: red;
+    pointer-events: none;
+  }
+
+  @keyframes float {
+    from {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(-100vh);
+      opacity: 0;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>Hey Rashmi ❤️</h1>
+
+  <p>
+    Hey loml ik sometimes don't understand you and don't listen to you  
+    i am sholly for being that way sometimes and i am changing myself  
+    as much as possible just for you🥺😚
+  </p>
+
+  <p>
+    I still remember wo clg mai jo humne kiss ki thi and teacher agye the  
+    or hum just bache the 😂
+  </p>
+
+  <p>
+    my life's been happier then ever since you came  
+    iloveyouuu jaannn🥺😚
+  </p>
+
+  <p>
+    and baat rhi kl ki i always respect your consent  
+    i want you to say no when you don't feel like you wanna get touched by me  
+    but i will have some overthinking so please jaan  
+    wo overthinking khtm krwane mai ap help krna🥺😚
+  </p>
+
+  <p>
+    Iloveyouuuuu forever and everrrrr😚😚😚😚😚😚  
+    💋💋💋💋💋❤️❤️❤️❤️
+  </p>
+
+  <h2>And for today…</h2>
+  <h1>Will you be my wifey? 👉🏻👈🏻🥺</h1>
+
+  <div class="buttons">
+    <button class="btn" onclick="yes()">YES 😍</button>
+    <button class="btn" id="noBtn">NO 🙄</button>
+  </div>
+
+  <div id="reply"></div>
+</div>
+
+<script>
+  function yes() {
+    document.getElementById("reply").innerHTML =
+      "You just made me the luckiest guy alive 🥹❤️<br>I love you Rashmi, always.";
+  }
+
+  const noBtn = document.getElementById("noBtn");
+  let escaped = false;
+
+  function escapeButton() {
+    if (!escaped) {
+      noBtn.style.animation = "shake 0.4s";
+      escaped = true;
+
+      setTimeout(() => {
+        moveButton();
+        noBtn.style.animation = "";
+        escaped = false;
+      }, 400);
+    }
+  }
+
+  function moveButton() {
+    const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+    const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+
+    noBtn.style.position = "fixed";
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+  }
+
+  noBtn.addEventListener("mouseover", escapeButton);
+  noBtn.addEventListener("click", escapeButton);
+
+  // Floating hearts
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (Math.random() * 10 + 16) + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+  }, 350);
+</script>
+
+</body>
+</html>
