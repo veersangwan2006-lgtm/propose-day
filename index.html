@@ -12,13 +12,15 @@
     background: linear-gradient(135deg, #ff6a88, #ff99ac);
     color: white;
     text-align: center;
-    overflow-x: hidden;
+    overflow: hidden;
   }
 
   .container {
     padding: 40px 16px 80px;
     max-width: 720px;
     margin: auto;
+    position: relative;
+    z-index: 1;
   }
 
   h1 { font-size: 2.4rem; }
@@ -43,7 +45,7 @@
     margin: 12px;
   }
 
-  /* shake animation */
+  /* NO button shake */
   @keyframes shake {
     0% { transform: translateX(0); }
     25% { transform: translateX(-6px); }
@@ -52,25 +54,26 @@
     100% { transform: translateX(0); }
   }
 
-  /* flying emoji */
-  .fly {
+  /* Emoji wave animation */
+  .emoji {
     position: fixed;
-    bottom: -30px;
-    font-size: 26px;
-    animation: flyUp 1.5s linear forwards;
+    font-size: 30px;
+    animation: wave 2.4s ease-in-out forwards;
     pointer-events: none;
+    z-index: 999;
   }
 
-  @keyframes flyUp {
-    from { transform: translateY(0); opacity: 1; }
-    to { transform: translateY(-120vh); opacity: 0; }
+  @keyframes wave {
+    0%   { transform: translateY(120vh); }
+    50%  { transform: translateY(-20vh); }
+    100% { transform: translateY(120vh); }
   }
 </style>
 </head>
 
 <body>
 
-<div class="container" id="mainContent">
+<div class="container">
   <h1>Hey Rashmi ❤️</h1>
 
   <p>
@@ -101,7 +104,7 @@
     💋💋💋💋💋❤️❤️❤️❤️
   </p>
 
-  <h2>And from today…</h2>
+  <h2>And for today…</h2>
   <h1>Will you be my wifey? 👉🏻👈🏻🥺</h1>
 
   <div class="buttons">
@@ -112,19 +115,25 @@
 
 <script>
   function yesFlow() {
-    for (let i = 0; i < 25; i++) {
-      const emoji = document.createElement("div");
-      emoji.className = "fly";
-      emoji.innerHTML = Math.random() > 0.5 ? "😚" : "❤️";
-      emoji.style.left = Math.random() * 100 + "vw";
-      emoji.style.fontSize = (Math.random() * 12 + 22) + "px";
-      document.body.appendChild(emoji);
-      setTimeout(() => emoji.remove(), 1500);
-    }
+    const total = 120; // number of emojis
+    let finished = 0;
 
-    setTimeout(() => {
-      window.location.href = "yes.html";
-    }, 1500);
+    for (let i = 0; i < total; i++) {
+      const e = document.createElement("div");
+      e.className = "emoji";
+      e.innerHTML = Math.random() > 0.5 ? "❤️" : "😚";
+      e.style.left = Math.random() * 100 + "vw";
+      e.style.fontSize = (Math.random() * 14 + 22) + "px";
+
+      e.addEventListener("animationend", () => {
+        finished++;
+        if (finished === total) {
+          window.location.href = "yes.html";
+        }
+      });
+
+      document.body.appendChild(e);
+    }
   }
 
   const noBtn = document.getElementById("noBtn");
@@ -133,8 +142,8 @@
   function escape() {
     if (running) return;
     running = true;
-
     noBtn.style.animation = "shake 0.4s";
+
     setTimeout(() => {
       const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
       const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
