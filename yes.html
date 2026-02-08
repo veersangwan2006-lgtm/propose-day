@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Thank You ❤️</title>
+<title>Yayyy 😁❤️</title>
 
 <style>
   body {
@@ -12,6 +12,7 @@
     background: linear-gradient(135deg, #ff758c, #ff7eb3);
     color: white;
     text-align: center;
+    overflow-x: hidden;
   }
 
   .container {
@@ -20,12 +21,33 @@
     margin: auto;
   }
 
-  h1 { font-size: 2.4rem; }
+  .yay {
+    font-size: 3rem;
+    margin-bottom: 25px;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+  }
 
   p {
     font-size: 1.25rem;
     line-height: 1.7;
     margin: 20px 0;
+  }
+
+  .heart {
+    position: fixed;
+    bottom: -20px;
+    font-size: 20px;
+    animation: float 6s linear;
+    pointer-events: none;
+  }
+
+  @keyframes float {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-100vh); opacity: 0; }
   }
 </style>
 </head>
@@ -33,6 +55,8 @@
 <body>
 
 <div class="container">
+  <div class="yay">Yayyy 😁</div>
+
   <h1>Thank you for saying YES 🥺❤️</h1>
 
   <p>
@@ -45,6 +69,18 @@
     ❤️❤️❤️
   </p>
 </div>
+
+<script>
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = Math.random() > 0.5 ? "❤️" : "😚";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (Math.random() * 10 + 18) + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+  }, 400);
+</script>
 
 </body>
 </html>
