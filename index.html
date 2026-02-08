@@ -21,15 +21,8 @@
     margin: auto;
   }
 
-  h1 {
-    font-size: 2.4rem;
-    margin-bottom: 10px;
-  }
-
-  h2 {
-    font-size: 1.6rem;
-    margin-top: 30px;
-  }
+  h1 { font-size: 2.4rem; }
+  h2 { font-size: 1.6rem; margin-top: 30px; }
 
   p {
     font-size: 1.05rem;
@@ -37,9 +30,7 @@
     margin: 14px 0;
   }
 
-  .buttons {
-    margin-top: 30px;
-  }
+  .buttons { margin-top: 30px; }
 
   .btn {
     background: white;
@@ -61,25 +52,25 @@
     100% { transform: translateX(0); }
   }
 
-  .heart {
+  /* flying emoji */
+  .fly {
     position: fixed;
-    bottom: -20px;
-    font-size: 20px;
-    animation: float 6s linear;
-    color: red;
+    bottom: -30px;
+    font-size: 26px;
+    animation: flyUp 1.5s linear forwards;
     pointer-events: none;
   }
 
-  @keyframes float {
+  @keyframes flyUp {
     from { transform: translateY(0); opacity: 1; }
-    to { transform: translateY(-100vh); opacity: 0; }
+    to { transform: translateY(-120vh); opacity: 0; }
   }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="container" id="mainContent">
   <h1>Hey Rashmi ❤️</h1>
 
   <p>
@@ -114,14 +105,26 @@
   <h1>Will you be my wifey? 👉🏻👈🏻🥺</h1>
 
   <div class="buttons">
-    <button class="btn" onclick="goYes()">YES 😍</button>
+    <button class="btn" onclick="yesFlow()">YES 😍</button>
     <button class="btn" id="noBtn">NO 🙄</button>
   </div>
 </div>
 
 <script>
-  function goYes() {
-    window.location.href = "yes.html";
+  function yesFlow() {
+    for (let i = 0; i < 25; i++) {
+      const emoji = document.createElement("div");
+      emoji.className = "fly";
+      emoji.innerHTML = Math.random() > 0.5 ? "😚" : "❤️";
+      emoji.style.left = Math.random() * 100 + "vw";
+      emoji.style.fontSize = (Math.random() * 12 + 22) + "px";
+      document.body.appendChild(emoji);
+      setTimeout(() => emoji.remove(), 1500);
+    }
+
+    setTimeout(() => {
+      window.location.href = "yes.html";
+    }, 1500);
   }
 
   const noBtn = document.getElementById("noBtn");
@@ -132,7 +135,6 @@
     running = true;
 
     noBtn.style.animation = "shake 0.4s";
-
     setTimeout(() => {
       const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
       const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
@@ -146,16 +148,6 @@
 
   noBtn.addEventListener("mouseover", escape);
   noBtn.addEventListener("click", escape);
-
-  setInterval(() => {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = (Math.random() * 10 + 16) + "px";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 6000);
-  }, 350);
 </script>
 
 </body>
