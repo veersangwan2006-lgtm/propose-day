@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I’m Sorry ❤️</title>
+
+<style>
+body{
+margin:0;
+font-family: 'Segoe UI', sans-serif;
+background: linear-gradient(135deg,#ff758c,#ff7eb3);
+color:white;
+text-align:center;
+}
+
+.container{
+max-width:700px;
+margin:auto;
+padding:60px 20px;
+}
+
+h1{
+font-size:2.4rem;
+margin-bottom:20px;
+}
+
+p{
+font-size:1.2rem;
+line-height:1.8;
+margin:20px 0;
+}
+
+.heart{
+position:fixed;
+bottom:-20px;
+font-size:20px;
+animation:float 6s linear;
+pointer-events:none;
+}
+
+@keyframes float{
+from{transform:translateY(0);opacity:1;}
+to{transform:translateY(-100vh);opacity:0;}
+}
+
+button{
+background:white;
+color:#ff4f7a;
+border:none;
+padding:14px 26px;
+border-radius:28px;
+font-size:1.1rem;
+margin-top:30px;
+cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>I’m really sorry 🥺</h1>
+
+<p>
+Hey Rashmi…  
+I just wanted to say that if I ever hurt you, made you upset,
+or made you feel unheard… I am really sorry.
+</p>
+
+<p>
+You mean a lot to me and the last thing I ever want
+is to be the reason for your sadness.
+</p>
+
+<p>
+I know I’m not perfect, but I promise I’m trying to become
+a better person for you and for us.
+</p>
+
+<p>
+I hope you can forgive me ❤️
+</p>
+
+<button onclick="love()">Tap if you forgive me 🥺</button>
+
+<p id="reply"></p>
+
+</div>
+
+<script>
+
+function love(){
+document.getElementById("reply").innerHTML =
+"I’ll keep trying to be better for you ❤️";
+}
+
+setInterval(()=>{
+const heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="❤️";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(Math.random()*10+16)+"px";
+document.body.appendChild(heart);
+setTimeout(()=>heart.remove(),6000);
+},400);
+
+</script>
+
+</body>
+</html>
